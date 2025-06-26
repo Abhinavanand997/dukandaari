@@ -1,6 +1,7 @@
 package com.example.shoppingapp
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,15 @@ class MyAdapter(val context: Activity, val productList: List<Product>) :
         Picasso.get().load(currentItem.thumbnail).resize(300, 300)
             .centerCrop()
             .into(holder.image);
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ProductDetailActivity::class.java)
+            intent.putExtra("title", currentItem.title)
+            intent.putExtra("price", currentItem.price)
+            intent.putExtra("rating", currentItem.rating)
+            intent.putExtra("thumbnail", currentItem.thumbnail)
+            context.startActivity(intent)
+        }
+
     }
 
     // return the size of the list
