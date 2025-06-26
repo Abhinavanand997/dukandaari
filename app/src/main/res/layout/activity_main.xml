@@ -15,7 +15,7 @@
         android:id="@+id/tvName"
         android:textSize="15sp"
         android:layout_gravity="center"
-       />
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

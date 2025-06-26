@@ -26,7 +26,9 @@ class MyAdapter(val context: Activity, val productList: List<Product>) :
 
         // show image as well
         // to put image links into Image view , picasso
-        Picasso.get().load(currentItem.thumbnail).into(holder.image);
+        Picasso.get().load(currentItem.thumbnail).resize(300, 300)
+            .centerCrop()
+            .into(holder.image);
     }
 
     // return the size of the list

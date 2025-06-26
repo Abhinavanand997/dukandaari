@@ -35,18 +35,23 @@ class MainActivity : AppCompatActivity() {
         retrofitData.enqueue(object : Callback<MyData?> {
 
             override fun onResponse(call: Call<MyData?>, response: Response<MyData?>) {
-               // what you want to perform when api call is a success
+                // what you want to perform when api call is a success
+                Log.d("API_CHECK", "onResponse called")
                 var responseBody= response.body()
+                if (responseBody == null) {
+                    Log.e("API_CHECK", "Response body is null")
+                    return
+                }
                 val productArray= responseBody?.products!!
-
-               myAdapter= MyAdapter(this@MainActivity, productArray)
-               recyclerView.adapter= myAdapter
+                Log.d("API_CHECK", "Products loaded: ${productArray.size}")
+                myAdapter= MyAdapter(this@MainActivity, productArray)
+                recyclerView.adapter= myAdapter
                 recyclerView.layoutManager= LinearLayoutManager(this@MainActivity)
             }
 
             override fun onFailure(call: Call<MyData?>, t: Throwable) {
-               // if api call is a failure
-                Log.d(TAG, "onFailure: " + t.message)
+                // if api call is a failure
+                Log.e("API_CHECK", "API FAILED: ${t.message}")
             }
         })
 
